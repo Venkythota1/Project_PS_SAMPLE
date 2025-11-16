@@ -1,0 +1,10 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPO_URI
+  build:
+    commands:
+      - echo Deploying Helm chart...
+      - helm upgrade --install my-app helm-chart --set image.repository=$ECR_REPO_URI --set image.tag=$DOCKER_IMAGE_TAG

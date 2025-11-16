@@ -1,0 +1,22 @@
+# Default values for the Helm chart
+replicaCount: 2
+image:
+  repository: my-fastapi-app-image
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 80
+ingress:
+  enabled: true
+  annotations: {}
+  hosts:
+    - host: my-fastapi-app.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
